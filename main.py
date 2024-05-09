@@ -1,4 +1,5 @@
 import socket
+import time
 
 SERVER_HOST = "0.0.0.0"
 SERVER_PORT = 8080
@@ -13,3 +14,7 @@ server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(5)
 
 print(f"Listening on {SERVER_HOST}:{SERVER_PORT}")
+
+client_socket, client_address = server_socket.accept()
+print(client_socket)
+print(client_socket)
