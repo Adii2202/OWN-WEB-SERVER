@@ -14,7 +14,11 @@ server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(5)
 
 print(f"Listening on {SERVER_HOST}:{SERVER_PORT}")
-
-client_socket, client_address = server_socket.accept()
-print(client_socket)
-print(client_socket)
+while True:
+    try:
+        client_socket, client_address = server_socket.accept()
+        print(client_socket)
+        print(client_socket)
+    except:
+        time.sleep(1)
+        continue
