@@ -14,11 +14,23 @@ server_socket.bind((SERVER_HOST, SERVER_PORT))
 server_socket.listen(5)
 
 print(f"Listening on {SERVER_HOST}:{SERVER_PORT}")
+
 while True:
-    try:
-        client_socket, client_address = server_socket.accept()
-        print(client_socket)
-        print(client_socket)
-    except:
-        time.sleep(1)
-        continue
+    client_socket, client_address = server_socket.accept()
+    request = client_socket.recv(1500).decode()
+    print(request)    
+    headers = request.split("\n")
+    header_components = headers[0].split()
+
+    http_method = header_components[0]
+    path = header_components[1]
+
+    if path == '/':
+        file_input = open("index.html")
+        body = file_input.read()
+        file_input.close()
+
+        resp = 'HTTP/1.1 200 OK\n\n' + body
+        # resp is a string but we neet it in the format of readable buffer
+        # send function could hv been used but there is no guarantee that it will send all the data whenever the network is busy or any other reason
+        client_socket.sendall(resp.encode())
