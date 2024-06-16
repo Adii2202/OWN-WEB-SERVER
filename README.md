@@ -1,4 +1,4 @@
-# HTTP Web Server from Scratch
+# HTTP Web Server
 
 - Stores Processes and Delivers web pages to the users.
 - Communication is done using Http
